@@ -1,6 +1,6 @@
 const store = require("../../../store/dummy");
 
-const TABLE = "USER";
+const TABLE = "user";
 
 function list() {
   return store.list(TABLE);
