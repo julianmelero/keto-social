@@ -3,8 +3,8 @@ exports.succes = function (req, res, msg, status) {
   let statusMsg = msg || '';
   res.status(statusCode).send({
     error: false,
-    status: statusMsg,
-    body: msg,
+    status: statusCode,
+    body: statusMsg,
   });
 };
 
@@ -13,7 +13,7 @@ exports.error = function (req, res, msg, status) {
   let statusMsg = msg || 'Internal server error';
   res.status(statusCode).send({
     error: true,
-    status: statusMsg,
-    body: msg,
+    status: statusCode,
+    body: statusMsg,
   });
 };

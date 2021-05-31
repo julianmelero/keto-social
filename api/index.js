@@ -13,5 +13,5 @@ app.use('/api/user', user);
 
 // Enable Server
 app.listen(config.api.port, () => {
-  console.log("API escuchando en puerto " + config.api.port);
+  console.log("API listening at port  " + config.api.port);
 });
