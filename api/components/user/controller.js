@@ -18,13 +18,16 @@ module.exports = function (injectedStore) {
     const user = {
       name: body.name,
     };
-    user.id = nanoid();
-    console.log(user);
+    user.id = nanoid();    
     return store.upsert(TABLE, user);
+  }
+  function remove(id) {
+    return store.remove(id)
   }
   return {
     list,
     get,
     upsert,
+    remove,
   };
 };

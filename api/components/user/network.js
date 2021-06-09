@@ -26,6 +26,15 @@ router.post("/", function (req, res) {
     });
 });
 
+router.delete("/:id", function (req, res) {
+  controller.remove(req.params.id).then((remove) => {
+    response.succes(req, res, remove, 201);
+  })
+  .catch((err) => {
+    response.error(req, res, err.message, 500);
+  });
+});
+
 router.get("/:id", function (req, res) {
   const user = controller
     .get(req.params.id)

@@ -2,7 +2,7 @@
 
 const db = {
   user: [{ id: "1", name: "Juan" },
-  {id: "2", name: "Ana"}],
+  {id: "2", name: "Jaime"}],
 };
 
 async function list(table) {
@@ -20,8 +20,11 @@ async function upsert(table,data) {
   await db.user.push(data);
 }
 
-async function remove(table, id) {  
-  return true;
+async function remove(ident) {  
+  // Get position in array    
+  let pos = db.user.find(id => ident);
+  
+  return db.user.splice(pos,1);
 }
 
 module.exports = {
