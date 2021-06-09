@@ -1,4 +1,5 @@
 const store = require("../../../store/dummy");
+const {nanoid} = require("nanoid");
 
 const TABLE = "user";
 
@@ -13,8 +14,17 @@ module.exports = function (injectedStore) {
   function get(id) {
     return store.get(TABLE, id);
   }
+  function upsert(body) {
+    const user = {
+      name: body.name,
+    };
+    user.id = nanoid();
+    console.log(user);
+    return store.upsert(TABLE, user);
+  }
   return {
     list,
-    get
+    get,
+    upsert,
   };
 };

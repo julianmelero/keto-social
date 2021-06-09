@@ -14,8 +14,10 @@ async function get(table, id) {
   return col.filter((item) => item.id === id)[0] || null;
 }
 
-async function upsert(table, id, data) {
-  await db[col].push(data);
+async function upsert(table,data) {
+  let col = await list(table);
+  console.log(data);
+  await db.user.push(data);
 }
 
 async function remove(table, id) {  

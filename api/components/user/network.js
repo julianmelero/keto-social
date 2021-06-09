@@ -15,6 +15,17 @@ router.get("/", function (req, res) {
     });
 });
 
+router.post("/", function (req, res) {
+  controller
+    .upsert(req.body)
+    .then((add) => {
+      response.succes(req, res, add, 201);
+    })
+    .catch((err) => {
+      response.error(req, res, err.message, 500);
+    });
+});
+
 router.get("/:id", function (req, res) {
   const user = controller
     .get(req.params.id)
