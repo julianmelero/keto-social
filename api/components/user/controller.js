@@ -19,6 +19,7 @@ module.exports = function (injectedStore) {
     const user = {
       name: body.name,
       username: body.username,
+      password: body.password,
     };
     user.id = nanoid();
 
