@@ -38,16 +38,44 @@ function handleCon() {
 handleCon();
 
 function list(table) {
-    console.log(table);
   return new Promise((resolve, reject) => {
-    connection.query(
-      `SELECT * FROM ${table}`,
-      (err, data) => {
-        if (err) return reject(err);
-        resolve(data);
-      }
-    );
+    connection.query(`SELECT * FROM ${table}`, (err, data) => {
+      if (err) return reject(err);
+      resolve(data);
+    });
   });
 }
 
-module.exports = { list };
+function get(table, id) {
+  return new Promise((resolve, reject) => {
+    connection.query(`SELECT * FROM ${table} WHERE id= ${id}`, (err, data) => {
+      if (err) return reject(err);
+      resolve(data);
+    });
+  });
+}
+
+function insert(table, data) {  
+  return new Promise((resolve, reject) => {
+    connection.query(`INSERT INTO ${table} SET ?`, data, (err, result) => {
+      if (err) return reject(err);
+      resolve(result);
+    });
+  });
+}
+
+function update(table, data) {
+  console.log(table);
+  return new Promise((resolve, reject) => {
+    connection.query(`SELECT * FROM ${table}`, (err, result) => {
+      if (err) return reject(err);
+      resolve(result);
+    });
+  });
+}
+
+function upsert(table,  data) {
+    return insert(table, data);
+}
+
+module.exports = { list, get, insert, upsert };
