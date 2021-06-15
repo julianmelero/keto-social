@@ -5,4 +5,10 @@ module.exports = {
   jwt: {
     secret: process.env.JWT_SECRET || "notasecret!",
   },
+  mysql: {
+    host: process.env.MYSQL_HOST || "remotemysql.com",
+    user: process.env.MYSQL_USER || "3pBVD9h448",
+    password: process.env.MYSQL_PASS || "XaZswYwkry",
+    database: process.env.MYSQL_DB || "3pBVD9h448",
+  }
 };
