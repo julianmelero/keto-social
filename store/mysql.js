@@ -39,7 +39,7 @@ handleCon();
 
 function list(table) {
   return new Promise((resolve, reject) => {
-    connection.query(`SELECT * FROM ${table}`, (err, data) => {
+    connection.query(`SELECT * FROM ${table};`, (err, data) => {
       if (err) return reject(err);
       resolve(data);
     });
@@ -48,7 +48,7 @@ function list(table) {
 
 function get(table, id) {
   return new Promise((resolve, reject) => {
-    connection.query(`SELECT * FROM ${table} WHERE id= ${id}`, (err, data) => {
+    connection.query(`SELECT * FROM ${table} WHERE id= '${id}'`, (err, data) => {
       if (err) return reject(err);
       resolve(data);
     });
@@ -67,7 +67,7 @@ function insert(table, data) {
 function update(table, data) {
   console.log(table);
   return new Promise((resolve, reject) => {
-    connection.query(`SELECT * FROM ${table}`, (err, result) => {
+    connection.query(`UPDATE ${table} SET ? WHERE id= ?`, [data,data.id], (err, result) => {
       if (err) return reject(err);
       resolve(result);
     });
@@ -75,7 +75,21 @@ function update(table, data) {
 }
 
 function upsert(table,  data) {
+  if(!data.id){
     return insert(table, data);
+  }
+  else{
+    return update(table,data);
+  }
+}
+
+function query(table,q) {
+  return new Promise((resolve,reject) => {
+    connection.query(`SELECT * FROM ${table} WHERE ?`, q,(err,result) => {
+      if (err) return reject(err);
+      resolve(result[0] || null);
+    })
+  })
 }
 
 module.exports = { list, get, insert, upsert };

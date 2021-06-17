@@ -7,7 +7,7 @@ const bcrypt = require("bcrypt");
 module.exports = function (injectedStore) {
   let store = injectedStore;
   if (!store) {
-    store = require("../../../store/dummy");
+    store = require("../../../store/mysql");
   }
 
   async function login(username, password) {
@@ -33,14 +33,12 @@ module.exports = function (injectedStore) {
     if (data.username) {
       authData.username = data.username;
     }
-
+    
     if (data.password) {
       authData.password = await bcrypt.hash(data.password, 6);
     }
-
-    authData.name = data.name;
-        
-    return store.upsert(TABLE, authData);
+    
+    return store.upsert('auth', authData);
   }
 
   return {

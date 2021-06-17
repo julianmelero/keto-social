@@ -18,8 +18,7 @@ module.exports = function (injectedStore) {
   async function upsert(body) {
     const user = {
       name: body.name,
-      username: body.username,
-      password: body.password,
+      username: body.username,      
     };
     user.id = nanoid();
 
@@ -27,7 +26,7 @@ module.exports = function (injectedStore) {
       await auth.upsert({
         id: user.id,
         username: user.username,
-        password: user.password,
+        password: body.password,
       });
     }
     return store.upsert(TABLE, user);
